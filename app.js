@@ -41,8 +41,6 @@ app.get('/register', (req, res)=>{
 app.post('/register', async (req, res)=>{
    const {name, email, password} = req.body
       
-      // const salt = await bcrypt.genSalt(10)
-      // const hash = await bcrypt.hash(password, salt)
       const user = await new User ({name, email, password})
       await user.save()        
       res.status(200).redirect('/')    
@@ -52,4 +50,3 @@ app.post('/register', async (req, res)=>{
 
 app.listen(3000, ()=>console.log("running in port 3000"))
 
-//No se encontró el campo de nombre. Asegúrate que tenga un id con valor "name": expected null not to be null

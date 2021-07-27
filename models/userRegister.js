@@ -1,13 +1,14 @@
 'use strict'
 
 const mongoose = require('mongoose')
-// const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
     name:{
-        type:String
+        type:String,
+        required: true,
     },
     email: {
         type: String,
@@ -20,11 +21,14 @@ const UserSchema = new Schema({
     }
 })
 
-// UserSchema.pre('save', async function (next){
-//     const salt = await bcrypt.genSalt(10)
-//     const hash = await bcrypt.hash(this.password, salt)
-//     this.password = hash
-//     next()
-// })
+UserSchema.pre('save', function (next){
+    bcrypt.hash(this.password, 10, (err, hash)=>{
+        if (err){
+            return next(err)
+        }    
+        this.password = hash
+        next()
+    })
+})
 
 module.exports = mongoose.model('register', UserSchema)
