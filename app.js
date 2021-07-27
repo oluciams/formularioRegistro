@@ -5,6 +5,7 @@ const app = express()
 const hbs = require('express-handlebars');
 const path = require('path')
 const User = require('./models/userRegister')
+const bcrypt = require('bcrypt')
 
 require('./configurationdb/configdb')
 
@@ -40,9 +41,9 @@ app.get('/register', (req, res)=>{
 app.post('/register', async (req, res)=>{
    const {name, email, password} = req.body
    try {      
-      // const salt = await bcrypt.genSalt(10)
-      // const hash = await bcrypt.hash(password, salt)
-      const user = await new User ({name, email, password})
+      const salt = await bcrypt.genSalt(10)
+      const hash = await bcrypt.hash(password, salt)
+      const user = await new User ({name, email, password: hash})
       await user.save()        
       res.status(200).redirect('/')     
    } catch (error) {
