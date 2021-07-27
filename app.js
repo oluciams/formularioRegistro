@@ -51,3 +51,5 @@ app.post('/register', async (req, res)=>{
 
 
 app.listen(3000, ()=>console.log("running in port 3000"))
+
+//No se encontró el campo de nombre. Asegúrate que tenga un id con valor "name": expected null not to be null
