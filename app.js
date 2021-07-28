@@ -34,13 +34,15 @@ app.engine('.hbs', hbs({
 app.set('view engine', 'hbs')
 
 app.get('/', async (req, res)=>{
+   const users = await User.find()
+   res.render('index', { users }) 
 
-   if(req.session.userId){                    
-      const users = await User.find()
-      res.render('index', { users })    
-   }else{
-     res.redirect('/register')
-   }
+   // if(req.session.userId){                    
+   //       const users = await User.find()
+   //    res.render('index', { users })    
+   // }else{
+   //   res.redirect('/register')
+   // }
 
  })
 
