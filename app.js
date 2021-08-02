@@ -42,7 +42,6 @@ app.get('/', async (req, res)=>{
    }else{
      res.redirect('/login')
    }
-
  })
 
 app.get('/register', (req, res)=>{
@@ -79,7 +78,7 @@ app.get('/logout', (req, res)=>{
    req.session = null
    res.clearCookie('session')
    res.clearCookie('session.sig')
-   res.redirect('login')
+   res.redirect('/login')
 }) 
 
 
