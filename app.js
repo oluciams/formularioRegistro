@@ -40,7 +40,7 @@ app.get('/', async (req, res)=>{
          const users = await User.find()
       res.render('index', { users })    
    }else{
-     res.redirect('/register')
+     res.redirect('/login')
    }
 
  })
